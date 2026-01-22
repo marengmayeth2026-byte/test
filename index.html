@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Song Lyrics Search</title>
+  <style>
+    :root {
+      --green-main: #2e7d32;
+      --green-light: #e8f5e9;
+      --green-accent: #66bb6a;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      display: flex;
+      gap: 30px;
+      background-color: var(--green-light);
+      color: #1b3a1b;
+    }
+    .main {
+      flex: 2;
+    }
+    .favorites {
+      flex: 1;
+      border-left: 3px solid var(--green-accent);
+      padding-left: 20px;
+    }
+    h1, h2 {
+      color: var(--green-main);
+    }
+    #searchBar {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 2px solid var(--green-accent);
+      border-radius: 6px;
+    }
+    #searchBar:focus {
+      outline: none;
+      border-color: var(--green-main);
+    }
+    .song {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--green-accent);
+    }
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--green-main);
+    }
+    .title:hover {
+      text-decoration: underline;
+    }
+    .fav-btn {
+      cursor: pointer;
+      font-size: 20px;
+      user-select: none;
+      color: var(--green-accent);
+    }
+    .fav-btn.active {
+      color: #fbc02d;
+    }
+    .lyrics {
+      display: none;
+      margin-top: 10px;
+      white-space: pre-wrap;
+      background: #ffffff;
+      padding: 10px;
+      border-left: 4px solid var(--green-main);
+      border-radius: 4px;
+    }
+    .fav-item {
+      cursor: pointer;
+      margin-bottom: 10px;
+      color: var(--green-main);
+      font-weight: bold;
+    }
+    .fav-item:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main">
+    <h1>Song Lyrics</h1>
+    <input type="text" id="searchBar" placeholder="Search by song title or lyrics..." onkeyup="searchSongs()" />
+
+    <div id="songList">
+
+<div class="song" data-id="Agnus">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Agnus</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">
+      <b> [Verse] </b>
+Alleluia, Alleluia
+For the Lord God Almighty reigns
+Alleluia, Alleluia
+For the Lord God Almighty reigns
+Alleluia <br>
+
+<b> [Chorus 1] </b>
+Holy, Holy
+Are You Lord God, Almighty
+Worthy is the Lamb, worthy is the Lamb
+You are Holy, Holy
+Are You Lord God, Almighty
+Worthy is the Lamb, worthy is the Lamb
+Amen<br>
+
+<b> [Verse] </b>
+Alleluia, Alleluia
+For the Lord God Almighty reigns
+Alleluia, Alleluia
+For the Lord God Almighty reigns
+Alleluia<br>
+
+<b> [Chorus 2] </b>
+Holy, Holy
+Are You Lord God, Almighty
+Worthy is the Lamb, worthy is the Lamb
+You are Holy, Holy<br>
+          
+Are You Lord God, Almighty
+Worthy is the Lamb, worthy is the Lamb
+You are Holy, Holy
+Are You Lord God, Almighty<br>
+          
+Worthy is the Lamb, worthy is the Lamb
+You are Holy, Holy
+Are You Lord God, Almighty
+Worthy is the Lamb, worthy is the Lamb...<br>
+        
+<b> [Chorus 3] </b>
+You are Holy, Holy
+Are You Lord God, Almighty...<br></div>
+      </div>
+
+      <div class="song" data-id="Alleluia">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Alleluia</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">ALE-LUHUYA! ALE-LUYA!
+Ikaw, Panginoon, ang Siyang daan
+Ang Buhay at ang Katotohanan
+ALE-LUYA! </div>
+      </div>
+
+     <div class="song" data-id="Alleluia (Celtic)">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Alleluia (Celtic)</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">AL....LE....LU....IA
+AL....LE....LU....IA
+AL....LE....LU....IA
+AL....LE....LU....IA </div>
+      </div> 
+
+
+ <div class="song" data-id="Humayo">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Humayo</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyric">
+Humayo't ihayag (Purihin Siya!)
+At ating ibunyag (Awitan Siya!)
+Pagliligtas ng Diyos na sa krus ni Hesus
+Ang Siyang sa mundo'y tumubos <br> <br>
+
+<b> KORO:</b> <br>
+Langit at lupa, Siya'y papurihan
+Araw at tala, Siya'y parangalan
+Ating 'pagdiwang pag-ibig ng Diyos sa tanan
+Aleluya <br>
+
+Halina't sumayaw (Buong bayan!)
+Lukso sabay sigaw (Sanlibutan!)
+Ang ngalan Niyang angkin singningning ng bituin
+Liwanag ng Diyos sumaatin (KORO) <br>
+
+At isigaw sa lahat
+Kalinga Niya'y wagas
+Kayong dukha't salat
+Pag-ibig Niya sa inyo at tapat <br> </div>
+    </div>    
+      
+<div class="song" data-id="manalig-ka">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Manalig Ka</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">Iluom lahat ng takot sa iyong damdamin
+Ang pangalan Nya lagi ang tawagin
+At S'ya'y nakikinig sa bawat hinaing
+Magmasid at mamulat sa Kanyang kapangyarihan <br>
+          
+Nabatid mo ba na S'ya'y naglalaan
+At patuloy na naghahatid ng tunay na kalayaan
+Manalig ka, tuyuin ang luha sa mga mata
+Hindi S'ya panaginip, hindi S'ya isang pangarap<br>
+          
+S'ya'y buhay, manalig ka
+At ngayo'y tila walang mararating na bukas
+Ngunit kung S'ya'y hahayaang maglandas
+Pag-asa ay muling mabibigkas <br>
+          
+Manalig ka, tuyuin ang luha sa mga mata
+Hindi S'ya panaginip, hindi S'ya isang pangarap
+S'ya'y buhay, manalig ka
+Manalig ka, tuyuin ang luha sa mga mata
+Hindi S'ya natutulog, hindi S'ya nakakalimot
+Kay Hesus, manalig ka.</div>
+      </div>
+
+
+<div class="song" data-id="Panginoon-maawa-ka">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Panginoon Maawa Ka</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">   
+Panginoon maawa ka <br>
+Panginoon maawa ka <br> <br>
+
+Kristo maawa ka <br>
+Kristo maawa ka / sa amin <br> <br>
+
+Panginoon maawa ka <br>
+Panginoon maawa ka <br> </div>
+  </div>
+
+          
+<div class="song" data-id="Sa-hapag">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Sa Hapag</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">
+Sa hapag ng panginoon
+Buong bayan ngayo'y nagtitipon
+Upang pagsaluhan ang kaligtasan
+Handog ng Diyos sa tanan <br>
+      
+Sa panahong tigang ang lupa
+Sa panahong ang ani sagana
+Sa panahon ng digmaan at kaguluhan
+Sa panahon ng kapayapaan <br>
+      
+Sa hapag ng panginoon
+Buong bayan ngayo'y nagtitipon
+Upang pagsaluhan ang kaligtasan
+Handog ng Diyos sa tanan <br>
+      
+Ang mga dakila't dukha
+Ang banal at makasalanan
+Ang bulag at lumpo ang api at sugatan
+Ang lahat ay inaanyayahan <br>
+      
+Sa hapag ng panginoon
+Buong bayan ngayo'y nagtitipon
+Upang pagsaluhan ang kaligtasan
+Handog ng Diyos sa tanan <br>
+      
+Sa aming pagdadalamhati
+Sa aming pagbibigay puri
+Ano pa mang pagtangis hapo't pasakit
+Ang pangalan nya'y sinasambit <br>
+      
+Sa hapag ng panginoon
+Buong bayan ngayo'y nagtitipon
+Upang pagsaluhan ang kaligtasan
+Handog ng Diyos sa tanan </div>
+    </div>
+
+<div class="song" data-id="Sa-Krus">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Sa Krus Mo</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">     
+Sa krus Mo at pagkabuhay
+Kami'y natubos Mong tunay
+Poong Hesus naming mahal <br>
+          
+Iligtas Mo kaming tanan
+Poong Hesus naming mahal
+Ngayon at magpakailanman<br> </div>
+    </div>
+
+      
+<div class="song" data-id="Santo">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Santo Santo</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">    
+Santo, Santo, Santo
+Panginoong Diyos
+Napupuno ang langit at lupa ng kadakilaan Mo
+Hosana, hosana, hosana sa kaitaasan     
+Hosana, hosana, hosana sa kaitaasan <br>
+      
+Pinagpala ang naparirito
+Sa ngalan ng Panginoon
+Hosana, hosana, hosana sa kaitaasan
+Hosana, hosana, hosana sa kaitaasan<br> </div>
+    </div>
+
+<div class="song" data-id="Takda-ng-panahon">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Takda ng Panahon</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">
+<b>I</b><br>
+Take and receive, o Lord, my liberty
+Take all my will, my mind, my memory.
+All that I have, you have given all to me.<br>
+
+<b>II</b><br>
+Now I return it to be governed by your will.
+Just say your words to me, at once I will obey.
+Your love is wealth enough for me, all else will I forego.
+<b>(repeat verse 1,2 then 1.) </b> <br> </div>
+    </div>
+
+      
+<div class="song" data-id="Take-and-receive">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Take and Receive</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyrics">
+<b>I</b><br>
+Take and receive, o Lord, my liberty
+Take all my will, my mind, my memory.
+All that I have, you have given all to me.<br>
+
+<b>II</b><br>
+Now I return it to be governed by your will.
+Just say your words to me, at once I will obey.
+Your love is wealth enough for me, all else will I forego.
+<b>(repeat verse 1,2 then 1.) </b> <br> </div>
+    </div>
+
+ <div class="song" data-id="Triple-Amen">
+        <div class="title-row">
+          <div class="title" onclick="toggleLyrics(this)">Triple Amen</div>
+          <div class="fav-btn" onclick="toggleFavorite(event, this)">☆</div>
+        </div>
+        <div class="lyric">
+A - men, <br>
+A- men, <br>
+A- men. <br>
+A - a  - men. <br> <br>
+
+A - men, <br>
+A- men, <br>
+A- men. <br>
+A - a  - men. <br> </div>
+    </div>    
+      
+      <!-- Duplicate up to Song 100 -->
+
+    </div>
+  </div>
+
+  <div class="favorites">
+    <h2>⭐ Favorite Playlist</h2>
+    <div id="favoriteList">No favorites yet.</div>
+  </div>
+
+  <script>
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    // Remove stale favorites that no longer exist in the DOM
+    const existingIds = Array.from(document.querySelectorAll('.song')).map(s => s.dataset.id);
+    favorites = favorites.filter(f => existingIds.includes(f.id));
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+
+    function toggleLyrics(titleElement) {
+      // Close all other lyrics
+      document.querySelectorAll('.lyrics').forEach(l => l.style.display = 'none');
+
+      const lyrics = titleElement.closest('.song').querySelector('.lyrics');
+      lyrics.style.display = 'block';
+    }
+
+    function toggleFavorite(event, btn) {
+      event.stopPropagation(); // prevent accordion click
+
+      const song = btn.closest('.song');
+      const id = song.dataset.id;
+      const title = song.querySelector('.title').innerText;
+
+      const index = favorites.findIndex(f => f.id === id);
+
+      if (index !== -1) {
+        // UNFAVORITE
+        favorites.splice(index, 1);
+        btn.classList.remove('active');
+        btn.innerText = '☆';
+      } else {
+        // FAVORITE
+        favorites.push({ id, title });
+        btn.classList.add('active');
+        btn.innerText = '★';
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      renderFavorites();
+    }
+
+    function renderFavorites() {
+      const favList = document.getElementById('favoriteList');
+      favList.innerHTML = '';
+
+      if (favorites.length === 0) {
+        favList.innerText = 'No favorites yet.';
+        return;
+      }
+
+      favorites.forEach(fav => {
+        const song = document.querySelector(`.song[data-id="${fav.id}"]`);
+        if (!song) return; // safety check
+
+        const div = document.createElement('div');
+        div.className = 'fav-item';
+        div.innerText = fav.title;
+        div.onclick = () => {
+          document.querySelectorAll('.lyrics').forEach(l => l.style.display = 'none');
+          song.scrollIntoView({ behavior: 'smooth' });
+          song.querySelector('.lyrics').style.display = 'block';
+        };
+        favList.appendChild(div);
+      });
+    }
+
+    function searchSongs() {
+      const input = document.getElementById('searchBar').value.toLowerCase();
+      const songs = document.getElementsByClassName('song');
+
+      for (let i = 0; i < songs.length; i++) {
+        const title = songs[i].querySelector('.title').innerText.toLowerCase();
+
+        // Search TITLE ONLY
+        songs[i].style.display = title.includes(input) ? '' : 'none';
+      }
+    }
+
+    // Initialize favorites on load
+    document.querySelectorAll('.song').forEach(song => {
+      const id = song.dataset.id;
+      const btn = song.querySelector('.fav-btn');
+      if (favorites.find(f => f.id === id)) {
+        btn.classList.add('active');
+        btn.innerText = '★';
+      }
+    });
+
+    renderFavorites();
+  </script>
+
+</body>
+</html>
